@@ -13,8 +13,11 @@ struct DeviceDetailView: View {
 
     var body: some View {
         VStack {
+            
+            Spacer()
+            
             Text(device.name)
-                .font(.largeTitle)
+                .font(.largeTitle.bold())
                 .padding()
 
             Text("UUID: \(device.identifier.uuidString)")
