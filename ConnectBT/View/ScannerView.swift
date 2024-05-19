@@ -4,6 +4,7 @@
 //
 //  Created by Sarah Jeong on 5/15/24.
 //
+
 import SwiftUI
 
 struct ScannerView: View {
@@ -28,8 +29,6 @@ struct ScannerView: View {
                 .padding(.top, 10) // 네비게이션 바의 여백 조정
                 .background(Color(UIColor.systemBackground))
 
-//                Divider() // 제목 아래에 구분선 추가
-
                 // 투명한 사각형 바
                 Rectangle()
                     .fill(Color.clear) // 사각형 내부를 투명하게 설정
@@ -51,13 +50,12 @@ struct ScannerView: View {
                             Spacer()
                         }
                     )
-//                    .border(Color.gray, width: 1) // 회색 테두리 추가
                     .padding([.leading, .trailing])
 
                 // 중간에 발견한 장치를 보여주는 ScrollView
                 ScrollView {
                     VStack(alignment: .leading) {
-                        ForEach(viewModel.devices) { device in
+                        ForEach(viewModel.devices.filter { $0.name != "Unknown" }) { device in
                             Button(action: {
                                 self.selectedDevice = device
                                 self.isShowingDetailView = true
@@ -79,6 +77,10 @@ struct ScannerView: View {
                             }
                         }
                     }
+                    .padding()
+                }
+                .refreshable {
+                    viewModel.startScanning()
                 }
 
                 Spacer()
