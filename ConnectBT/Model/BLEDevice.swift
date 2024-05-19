@@ -13,4 +13,6 @@ struct BLEDevice: Identifiable {
     let name: String
     let identifier: UUID
     let rssi: NSNumber
+    var serviceUUIDs: [CBUUID] = []
+    var characteristicUUIDs: [CBUUID] = []
 }
